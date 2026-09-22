@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/decentraid
+    username: YOUR_POSTGRES_USERNAME
+    password: YOUR_POSTGRES_PASSWORD
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+decentraid:
+  blockchain:
+    rpc-url: http://127.0.0.1:7545
+    contract-address: 0x86f92206726F0210A896d3ee75eB1b560aef9dbD
+    owner-private-key: YOUR_GANACHE_PRIVATE_KEY_HERE
