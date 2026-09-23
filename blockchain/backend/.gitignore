@@ -4,3 +4,4 @@ target/
 *.iml
 application-local.yml
 application.yml
+ai-context.md
