@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    margin: 0;
+    font-feature-settings: 'cv05' 1, 'ss01' 1;
+  }
+
+  /* Machine data: hashes, wallet addresses, transaction references. */
+  .data {
+    @apply font-mono text-[0.8125rem] tracking-tight;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-seal-400 ring-offset-2 ring-offset-white rounded-[3px];
+  }
+
+  ::selection {
+    @apply bg-seal-100 text-seal-700;
+  }
+}
+
+@layer components {
+  .field-label {
+    @apply block text-sm font-medium text-ink mb-1.5;
+  }
+
+  .hint {
+    @apply text-sm text-ink-soft;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
