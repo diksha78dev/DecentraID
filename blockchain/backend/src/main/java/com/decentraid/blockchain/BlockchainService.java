@@ -13,6 +13,7 @@ import org.web3j.abi.datatypes.Type;
 import org.web3j.abi.datatypes.Utf8String;
 import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.crypto.Credentials;
+import org.web3j.crypto.Keys;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.response.EthCall;
@@ -54,7 +55,7 @@ public class BlockchainService {
                     txManager.sendTransaction(
                             DefaultGasProvider.GAS_PRICE,
                             DefaultGasProvider.GAS_LIMIT,
-                            contractAddress,
+                            Keys.toChecksumAddress(contractAddress),
                             encodedFunction,
                             BigInteger.ZERO
                     );
@@ -97,7 +98,9 @@ public class BlockchainService {
             String encodedFunction = FunctionEncoder.encode(function);
             EthCall response = web3j.ethCall(
                     org.web3j.protocol.core.methods.request.Transaction.createEthCallTransaction(
-                            ownerCredentials.getAddress(), contractAddress, encodedFunction),
+                            Keys.toChecksumAddress(ownerCredentials.getAddress()),
+                            Keys.toChecksumAddress(contractAddress),
+                            encodedFunction),
                     DefaultBlockParameterName.LATEST
             ).send();
 
@@ -118,7 +121,7 @@ public class BlockchainService {
     public String authorizeIssuer(String issuerAddress) {
         Function function = new Function(
                 "authorizeIssuer",
-                Collections.singletonList(new Address(issuerAddress)),
+                Collections.singletonList(new Address(Keys.toChecksumAddress(issuerAddress))),
                 Collections.emptyList()
         );
         return sendTransaction(function);
@@ -127,7 +130,7 @@ public class BlockchainService {
     public String revokeIssuer(String issuerAddress) {
         Function function = new Function(
                 "revokeIssuer",
-                Collections.singletonList(new Address(issuerAddress)),
+                Collections.singletonList(new Address(Keys.toChecksumAddress(issuerAddress))),
                 Collections.emptyList()
         );
         return sendTransaction(function);
@@ -136,7 +139,7 @@ public class BlockchainService {
     public boolean isAuthorizedIssuer(String issuerAddress) {
         Function function = new Function(
                 "isAuthorizedIssuer",
-                Collections.singletonList(new Address(issuerAddress)),
+                Collections.singletonList(new Address(Keys.toChecksumAddress(issuerAddress))),
                 Collections.singletonList(new TypeReference<Bool>() {})
         );
         List<Type> result = callFunction(function);
@@ -151,7 +154,7 @@ public class BlockchainService {
                 List.of(
                         new Utf8String(credentialId),
                         new Utf8String(credentialHash),
-                        new Address(holderAddress),
+                        new Address(Keys.toChecksumAddress(holderAddress)),
                         new Utf8String(credentialType)
                 ),
                 Collections.emptyList()

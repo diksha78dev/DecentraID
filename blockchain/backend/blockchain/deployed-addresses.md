@@ -1,13 +1,19 @@
-# DecentraID — Deployed Contract & Demo Accounts (Phase 2 output)
+# DecentraID — Deployed Contract & Demo Accounts
 
-Contract address: 0x86f92206726F0210A896d3ee75eB1b560aef9dbD
+Contract address: 0x8c64aa8011cc42c5a2e5385e6536eb68fafa531e
+Solidity version: 0.8.19
+RPC: http://127.0.0.1:8545
 
-- Owner (Admin):     0xD30c474CcD888f60F9A7941586cC473304a59DAF
-- Issuer:            0x907Fd68b8806350Cb2e4569d1230710e389f39ad
-- Holder:            0x7C11Dd59d8884a9853989A7a9f695a75A4a8f7C9
-- Random attacker:   0x82D7ed0b091aFf14b91723E3393157cE45F8e3Cb
+- Owner (Admin):     0x85058e7848ca212b5dc88126f7481f4b9161abc4
+- Issuer:            0xb511f8f01e90e2f34d7740323ebe4904afb1273d
+- Holder:            0x794aa82aa19d4f8b7191c8922c90e8f3271fe421
+- Random attacker:   0x54e7c99c4425be6c9054d04d8afb4a623c2e8128
 
-All 14 manual test cases (issuer authorization, duplicate credential rejection,
-unauthorized issuance rejection, verification, revocation, double-revocation
-rejection, nonexistent credential rejection, issuer de-authorization) passed
-in Remix against a local Ganache network (RPC: http://127.0.0.1:7545).
+The end-to-end backend flow passed against the active local Ganache network:
+issuer authorization, credential issuance, verification, revocation, and
+post-revocation verification.
+
+Warning: keep Ganache running. Restarting it resets the local blockchain,
+including this contract, authorization state, credentials, and account
+balances. The contract must be redeployed and the backend signer must be
+funded again after a Ganache restart.

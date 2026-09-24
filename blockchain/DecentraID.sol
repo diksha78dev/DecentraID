@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity 0.8.19;
 
 /// @title DecentraID - Blockchain-Based Digital Identity Verification
 /// @notice Stores only tamper-evident proof data. No PII is stored on-chain.
